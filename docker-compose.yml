@@ -1,0 +1,6 @@
+services:
+  gobook:
+    build: .
+    container_name: gobook
+    volumes:
+      - .:/gobook
