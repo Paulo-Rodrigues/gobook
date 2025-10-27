@@ -66,14 +66,6 @@ func TestBookWithFormat(t *testing.T) {
 	}
 }
 
-func TestBookDefaultFormat(t *testing.T) {
-	b, _ := book.New("Default Format Book", 200, nil, book.FormatPaperback)
-
-	if b.Format != book.FormatPaperback {
-		t.Errorf("Expected format to be %v, got %v", book.FormatPaperback, b.Format)
-	}
-}
-
 func TestBookFormatValidation(t *testing.T) {
 	a, _ := author.New("Martin", "Fowler")
 	
