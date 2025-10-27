@@ -20,3 +20,11 @@ func TestAuthorInitialization(t *testing.T) {
 		t.Errorf("Expected last name to be 'Doe', got %v", a.LastName)
 	}
 }
+
+func TestAuthorFullName(t *testing.T) {
+	a, _ := author.New("Jane", "Smith")
+
+	if a.FullName() != "Jane Smith" {
+		t.Errorf("Expected full name to be 'Jane Smith', got %v", a.FullName())
+	}
+}

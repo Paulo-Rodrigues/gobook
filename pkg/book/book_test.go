@@ -2,11 +2,12 @@ package book_test
 
 import (
 	"testing"
+	"gobook/pkg/author"
 	"gobook/pkg/book"
 )
 
 func TestInitializeBook(t *testing.T) {
-	b, err := book.New("The Go Programming Language", 256)
+	b, err := book.New("The Go Programming Language", 256, nil)
 
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
@@ -26,7 +27,7 @@ func TestInitializeBook(t *testing.T) {
 }
 
 func TestValidations(t *testing.T) {
-	_, err := book.New("", -10)
+	_, err := book.New("", -10, nil)
 
 	if err == nil {
 		t.Fatalf("Expected error for invalid book parameters, got nil")
@@ -34,5 +35,20 @@ func TestValidations(t *testing.T) {
 
 	if err.Error() != "Title cannot be empty" && err.Error() != "Number of pages cannot be negative" {
 		t.Errorf("Unexpected error message: %v", err)
+	}
+}
+
+func TestBookWithAuthor(t *testing.T) {
+	a, _ := author.New("Jhon", "Doe")
+	b, _ := book.New("Learning Go", 300, a)
+
+	if b.BookAuthor == nil {
+		t.Errorf("Expected book to have an author, got nil")
+	}
+
+	expected := "Jhon Doe"
+
+	if b.BookAuthor.FullName() != expected {
+		t.Errorf("Expected author name to be %v, got %v", expected, b.BookAuthor.FullName())
 	}
 }

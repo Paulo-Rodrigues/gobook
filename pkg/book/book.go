@@ -1,14 +1,18 @@
 package book
 
-import "fmt"
+import (
+	"fmt"
+	"gobook/pkg/author"
+)
 
 type Book struct {
 	Title string
 	NumberOfPages int
 	Status BookStatus
+	BookAuthor *author.Author
 }
 
-func New(title string, numberOfPages int) (*Book, error) {
+func New(title string, numberOfPages int, bookAuthor *author.Author) (*Book, error) {
 	if err := validate(title, numberOfPages); err != nil {
 		return nil, err
 	}
@@ -17,6 +21,7 @@ func New(title string, numberOfPages int) (*Book, error) {
 		Title: title,
 		NumberOfPages: numberOfPages,
 		Status: StatusAvailable,
+		BookAuthor: bookAuthor,
 	}, nil
 }
 
