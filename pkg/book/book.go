@@ -9,10 +9,11 @@ type Book struct {
 	Title string
 	NumberOfPages int
 	Status BookStatus
+	Format BookFormat
 	BookAuthor *author.Author
 }
 
-func New(title string, numberOfPages int, bookAuthor *author.Author) (*Book, error) {
+func New(title string, numberOfPages int, bookAuthor *author.Author, format BookFormat) (*Book, error) {
 	if err := validate(title, numberOfPages); err != nil {
 		return nil, err
 	}
@@ -21,6 +22,7 @@ func New(title string, numberOfPages int, bookAuthor *author.Author) (*Book, err
 		Title: title,
 		NumberOfPages: numberOfPages,
 		Status: StatusAvailable,
+		Format: format,
 		BookAuthor: bookAuthor,
 	}, nil
 }
